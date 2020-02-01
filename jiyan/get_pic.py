@@ -5,12 +5,10 @@ import time
 import urllib
 
 def get_pic():
-    # PROXY = '119.28.194.66:8888'
     chrome_options = webdriver.ChromeOptions()
-    # chrome_options.add_argument('--proxy-server=http://%s' % PROXY)
-    driver = webdriver.Chrome(chrome_options=chrome_options)  # 启动全局浏览器
+    chrome_options.add_argument('--headless')
+    driver = webdriver.Chrome(options=chrome_options)  # 启动全局浏览器
     driver.set_window_size(1024, 768)
-
     driver.get('http://www.gsxt.gov.cn/index.html')
     time.sleep(3)
     # kw = driver.find_element_by_xpath('//form[@class="search_index_box auto fix mt10"]//input[7]')
@@ -41,7 +39,7 @@ def get_pic():
 
 
         try:
-            if img_link[0]:  # 如果弹出验证码
+            if img_link:  # 如果弹出验证码
                 print(img_link)
                 # driver.get_screenshot_as_file('.//static/1.png')
                 print('*' * 100)
@@ -59,7 +57,8 @@ def get_pic():
                 img_link1 = login_html.xpath('//*[@class="geetest_item_img"]/@src')  # 获取验证码链接
                 img_path = '../jiyan/crawled_img/verifyCode{0}.jpg'.format(int(time.time()))
                 urllib.request.urlretrieve(img_link1[0], img_path)
-        except:
+        except Exception as e:
+            print(e)
             driver.quit()
             get_pic()
 
@@ -80,5 +79,5 @@ def get_pic():
         time.sleep(5)
 
 if __name__ == '__main__':
-
     get_pic()
+
