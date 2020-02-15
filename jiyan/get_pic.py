@@ -2,7 +2,7 @@ from selenium import webdriver
 from lxml import etree
 from selenium.webdriver.common.keys import Keys
 import time
-import urllib
+import urllib.request
 
 def get_pic():
     chrome_options = webdriver.ChromeOptions()
@@ -44,7 +44,7 @@ def get_pic():
                 # driver.get_screenshot_as_file('.//static/1.png')
                 print('*' * 100)
                 # logger.info('出现验证码--{}'.format(uuid))
-                img_path = '../jiyan/crawled_img/verifyCode{0}.jpg'.format(
+                img_path = '../jiyan/data/all_images/verifyCode{0}.jpg'.format(
                     int(time.time()))
                 urllib.request.urlretrieve(img_link[0], img_path)
             else:

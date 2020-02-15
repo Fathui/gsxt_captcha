@@ -43,12 +43,9 @@ class METADATA(Structure):
     _fields_ = [("classes", c_int),
                 ("names", POINTER(c_char_p))]
 
-    
 
-#lib = CDLL("/home/pjreddie/documents/darknet/libdarknet.so", RTLD_GLOBAL)
-# lib = CDLL("/home/lihui/Projects/ai/darknet/libdarknet.so", RTLD_GLOBAL)
-# lib = CDLL("/home/geng/gsxt_captcha/libdarknet.so", RTLD_GLOBAL) # 这里需要改为你自己的路径
-lib = CDLL("../libdarknet.so", RTLD_GLOBAL) # 这里需要改为你自己的路径
+
+lib = CDLL("libdark.dylib", RTLD_GLOBAL) # 这里需要改为你自己的路径
 
 lib.network_width.argtypes = [c_void_p]
 lib.network_width.restype = c_int
@@ -127,7 +124,7 @@ def classify(net, meta, im):
     return res
 
 
-def detect(net, meta, image, thresh=.5, hier_thresh=.5, nms=.45):  
+def detect(net, meta, image, thresh=.5, hier_thresh=.5, nms=.45):
     im = load_image(image, 0, 0)
     num = c_int(0)
     pnum = pointer(num)
@@ -153,22 +150,4 @@ def detect(net, meta, image, thresh=.5, hier_thresh=.5, nms=.45):
     free_image(im)
     free_detections(dets, num)
     return res
-    
-if __name__ == "__main__":
-    #net = load_net("cfg/densenet201.cfg", "/home/pjreddie/trained/densenet201.weights", 0)
-    #im = load_image("data/wolf.jpg", 0, 0)
-    #meta = load_meta("cfg/imagenet1k.data")
-    #r = classify(net, meta, im)
-    #print r[:10]
-
-    net = load_net(b"../cfg/yolo-origin.cfg",
-                     b"../jiyan/backup/yolo-origin_49200.weights", 0)
-    meta = load_meta(b"../cfg/yolo-origin.data")
-    r = detect(net, meta, b'../16.jpg', thresh=.5)
-    # print r
-    for ret in r:
-        if ret[1] > 0.5:
-            print(ret[0], ret[1], ret[2])
-
-    
 

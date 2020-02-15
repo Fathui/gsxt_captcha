@@ -1,1 +1,7 @@
 .DS_Store
+*.jpg
+*.txt
+__pycache__
+libdark.dylib
+darknet
+jiyan/backup/yolo-origin.backup
