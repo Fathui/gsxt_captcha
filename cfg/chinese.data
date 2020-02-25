@@ -1,6 +1,6 @@
-classes=3604
-train  = chinese_classify/data/train.list
-valid  = chinese_classify/data/valid.list
+classes=1158
+train  = chinese_classify/data/train.txt
+valid  = chinese_classify/data/valid.txt
 labels = chinese_classify/data/labels.txt
 backup = chinese_classify/backup
 top=100

@@ -1,0 +1,1 @@
+./darknet classifier train cfg/chinese.data cfg/chinese_character.cfg

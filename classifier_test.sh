@@ -1,0 +1,1 @@
+./darknet classifier valid cfg/chinese.data cfg/chinese_character.cfg chinese_classify/backup/chinese_classify.backup

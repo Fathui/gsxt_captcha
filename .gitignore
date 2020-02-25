@@ -5,3 +5,4 @@ __pycache__
 libdark.dylib
 darknet
 jiyan/backup/yolo-origin.backup
+.idea/
